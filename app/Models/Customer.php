@@ -21,4 +21,9 @@ class Customer extends Model
         "phone",
         "type",
     ];
+
+    public function trackingOrders()
+    {
+        return $this->hasMany(TrackingOrder::class, 'customers_id', 'customer_id');
+    }
 }

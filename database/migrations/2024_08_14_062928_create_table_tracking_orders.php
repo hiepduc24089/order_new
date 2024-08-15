@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id')->nullable();
             $table->string('order_code')->nullable();
             $table->dateTime('order_create_time')->nullable();
+            $table->unsignedBigInteger('bag_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

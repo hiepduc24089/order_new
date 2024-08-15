@@ -20,6 +20,22 @@ class TrackingOrder extends Model
         "customer_id",
         "order_id",
         "order_code",
-        "order_create_time"
+        "order_create_time",
+        "bag_id"
     ];
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class, 'warehouse_id', 'warehouse_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'customers_id');
+    }
+
+    public function freightBills()
+    {
+        return $this->hasMany(FreightBill::class, 'package_id', 'package_id');
+    }
 }

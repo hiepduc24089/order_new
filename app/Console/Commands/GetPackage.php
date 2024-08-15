@@ -6,8 +6,10 @@ use App\Models\Customer;
 use App\Models\FreightBill;
 use App\Models\ShippingPartner;
 use App\Models\TrackingOrder;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -53,6 +55,7 @@ class GetPackage extends Command
                                 'order_id' => $package['order']['id'] ?? null,
                                 'order_code' => $package['order']['code'] ?? null,
                                 'order_create_time' => Carbon::parse($package['created_at'])->toDateTimeString() ?? null,
+                                'bag_id' => $package['bag']['id'] ?? null
                             ]
                         );
 
@@ -86,6 +89,33 @@ class GetPackage extends Command
                                     []
                                 );
                             }
+                        }
+
+                        if (!empty($package['customer']['email']) && !empty($package['customer']['username'])) {
+                            User::updateOrCreate(
+                                ['email' => $package['customer']['email'], 'username' => $package['customer']['username']],
+                                [
+                                    'name' => $package['customer']['full_name'] ?? 'default_name',
+                                    'phone' => $package['customer']['phone'] ?? null,
+                                    'password' => Hash::make('12345678'),
+                                    'customer_id' => $package['customer']['id'] ?? null,
+                                    'role_id' => 2,
+                                    'updated_at' => now(),
+                                ]
+                            );
+                        } elseif (!empty($package['customer']['username'])) {
+                            User::updateOrCreate(
+                                ['username' => $package['customer']['username']],
+                                [
+                                    'name' => $package['customer']['full_name'] ?? 'default_name',
+                                    'email' => $package['customer']['email'] ?? 'default_email@example.com',
+                                    'phone' => $package['customer']['phone'] ?? null,
+                                    'password' => Hash::make('12345678'),
+                                    'customer_id' => $package['customer']['id'] ?? null,
+                                    'role_id' => 2,
+                                    'updated_at' => now(),
+                                ]
+                            );
                         }
                     }
                     $this->info('Packages saved to the database successfully.');
