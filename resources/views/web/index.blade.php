@@ -34,8 +34,6 @@
 </div>
 </body>
 
-<script src="assets/js/apexcharts.bundle.js"></script>
-<script src="assets/js/dataTables.bundle.js"></script>
 <script src="assets/js/index.js"></script>
 <script src="assets/js/libscripts.bundle.js"></script>
 <script src="assets/js/template.js"></script>
