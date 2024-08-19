@@ -1,22 +1,22 @@
 {!! Form::open(['route' => 'login.perform', 'class' => 'card-body pt-3', 'id' => 'login', 'name' => 'login']) !!}
 @include('flash_messages')
 <div class="form-group">
-    {!! Form::label('username', 'Username', ['class' => 'form-label']) !!}
+    {!! Form::label('phone', 'Số Điện Thoại', ['class' => 'form-label']) !!}
     <div class="input-group mb-4">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fe fe-mail" aria-hidden="true"></i></span>
         </div>
-        {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Username']) !!}
+        {!! Form::text('phone', null, ['class' => 'form-control', 'placeholder' => 'Số Điện Thoại']) !!}
     </div>
 </div>
 
 <div class="form-group">
-    {!! Form::label('password', 'Password', ['class' => 'form-label']) !!}
+    {!! Form::label('password', 'Mật Khẩu', ['class' => 'form-label']) !!}
     <div class="input-group mb-4">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fe fe-eye-off" aria-hidden="true"></i></span>
         </div>
-        {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
+        {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Mật Khẩu']) !!}
     </div>
 </div>
 

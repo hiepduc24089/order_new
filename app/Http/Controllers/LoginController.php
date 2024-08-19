@@ -16,21 +16,21 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required',
+            'phone' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('phone', 'password');
         $remember = $request->filled('remember_me');
 
         if (Auth::attempt($credentials, $remember)) {
             return redirect()->intended(route('home.index'));
         }
 
-        session()->flash('error', 'Username or Password is incorrect');
+        session()->flash('error', 'Số Điện Thoại hoặc Mật Khẩu không đúng');
 
         return back()->withErrors([
-            'username' => 'Username or Password is incorrect',
+            'username' => 'Số Điện Thoại hoặc Mật Khẩu không đúng',
         ]);
     }
 
