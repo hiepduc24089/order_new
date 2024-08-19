@@ -9,7 +9,11 @@
         </a>
         <!-- Menu: main ul -->
         <ul class="menu-list flex-grow-1 mt-3">
-            <li><a class="m-link active" href="{{route('home.index')}}"><i class="icofont-home fs-5"></i> <span>Dashboard</span></a></li>
+            <li><a class="m-link" href="{{route('home.index')}}"><i class="icofont-home fs-5"></i> <span>Trang Chủ</span></a></li>
+            <li><a class="m-link" href="{{route('home.index')}}"><i class="icofont-notepad fs-5"></i> <span>Chi Tiết</span></a></li>
+            @if(Auth::user()->role_id == 1)
+                <li><a class="m-link" href="{{route('customer.index')}}"><i class="icofont-funky-man fs-5"></i> <span>Quản Lý Khách Hàng</span></a></li>
+            @endif
 {{--            <li class="collapsed">--}}
 {{--                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-product" href="#">--}}
 {{--                    <i class="icofont-truck-loaded fs-5"></i> <span>Products</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>--}}

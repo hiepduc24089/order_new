@@ -21,7 +21,8 @@ class TrackingOrder extends Model
         "order_id",
         "order_code",
         "order_create_time",
-        "bag_id"
+        "bag_id",
+        "note"
     ];
 
     public function warehouse()

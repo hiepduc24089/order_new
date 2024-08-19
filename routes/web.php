@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -29,6 +30,11 @@ Route::post('/password/reset', [ForgotPasswordController::class, 'sendResetLinkE
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/export', [HomeController::class, 'exportExcel'])->name('home.export');
+    Route::get('/details/{id?}', [HomeController::class, 'show'])->name('home.details');
+    Route::post('/details/notes/{id?}', [HomeController::class, 'submitNote'])->name('submit.notes');
+
+    Route::resource('customer', CustomerController::class);
 });
 
 Route::post('/packages', [OrderController::class, 'getPackage'])->name('api.package');

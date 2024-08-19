@@ -29,8 +29,23 @@
 
 <div class="body d-flex py-3">
     <div class="container-xxl tracking-field">
-        <div class="title">
+        <div class="title d-flex flex-wrap justify-content-between">
             <h5 class="mb-0">Danh sách đơn ký gửi</h5>
+            <form action="{{ route('home.export') }}" method="GET">
+                <!-- Include all current search parameters as hidden fields -->
+                <input type="hidden" name="freight_bill" value="{{ request('freight_bill') }}">
+                <input type="hidden" name="create_time_from" value="{{ request('create_time_from') }}">
+                <input type="hidden" name="create_time_to" value="{{ request('create_time_to') }}">
+                <input type="hidden" name="package_id" value="{{ request('package_id') }}">
+                <input type="hidden" name="order_id" value="{{ request('order_id') }}">
+                <input type="hidden" name="bag_id" value="{{ request('bag_id') }}">
+                <input type="hidden" name="customer_name" value="{{ request('customer_name') }}">
+                <input type="hidden" name="warehouse_id" value="{{ request('warehouse_id') }}">
+                <input type="hidden" name="statuses" value="{{ request('statuses') }}">
+
+                <button type="submit" class="btn btn-secondary mr-3">Xuất Excel</button>
+            </form>
+
         </div>
         <hr>
         @php
@@ -53,14 +68,16 @@
             @foreach($trackingOrders as $trackingOrder)
                 <div class="row g-3 mb-3 color-bg-fff tracking-wrapper">
                     <div class="col-md-12 mb-3">
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                        <span class="text-color-green font-weight-bold d-flex align-items-center">
-                            <span id="orderId">{{$trackingOrder->package_id ?? "N/A"}}</span>
-                            <button id="copyButton" title="Copy Order ID">
-                                <i class="fa fa-copy"></i>
-                            </button>
-                        </span>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <div class="d-flex flex-wrap align-items-center mb-2">
+                                <span class="text-color-green font-weight-bold d-flex align-items-center">
+                                    <a href="{{route('home.details', ($trackingOrder->id))}}" class="text-color-green">
+                                        <span id="orderId">{{$trackingOrder->package_id ?? "N/A"}}</span>
+                                    </a>
+                                    <button id="copyButton" title="Copy Order ID">
+                                        <i class="fa fa-copy"></i>
+                                    </button>
+                                </span>
                                 <span>| Khách hàng:</span>
                                 <span class="warehouse font-weight-bold ml-2 mr-2">{{$trackingOrder->customer->full_name ?? "N/A"}}</span>
                                 <span>| Kho nhận:</span>
@@ -163,6 +180,33 @@
             document.execCommand('copy');
 
             document.body.removeChild(tempInput);
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Copy all search form values to export form when search form is submitted
+        document.getElementById('searchForm').addEventListener('submit', function () {
+            const exportForm = document.querySelector('form[action="{{ route('home.export') }}"]');
+
+            // Loop through all the search form elements and append them to the export form
+            const elements = this.elements;
+            for (let i = 0; i < elements.length; i++) {
+                const element = elements[i];
+                if (element.name) {
+                    // Check if element already exists in the export form
+                    let exportElement = exportForm.querySelector(`input[name="${element.name}"]`);
+                    if (!exportElement) {
+                        // Create a hidden input element for the export form
+                        exportElement = document.createElement('input');
+                        exportElement.type = 'hidden';
+                        exportElement.name = element.name;
+                        exportForm.appendChild(exportElement);
+                    }
+                    // Set the value
+                    exportElement.value = element.value;
+                }
+            }
         });
     });
 </script>

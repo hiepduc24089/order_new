@@ -14,7 +14,7 @@ class HomeRepository extends AppBaseRepository
         return TrackingOrder::class;
     }
 
-    public function getAllTrackingOrder(Request $request, $perPage = 10, $archived = false)
+    public function getAllTrackingOrder(Request $request, $perPage = 10, $archived = false, $getAll = false)
     {
         $this->scopeQuery(function ($query) use ($request, $perPage, $archived) {
             // Check the user's role
@@ -72,6 +72,12 @@ class HomeRepository extends AppBaseRepository
         });
 
         $this->pushCriteria(app(RequestCriteria::class));
-        return $this->paginate($perPage);
+        if($getAll === true) {
+            $tracking = $this->get();
+
+        } else {
+            $tracking = $this->paginate($perPage);
+        }
+        return $tracking;
     }
 }
