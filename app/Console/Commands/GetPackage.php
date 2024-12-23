@@ -34,14 +34,19 @@ class GetPackage extends Command
      */
     public function handle()
     {
-        $url = route('api.package');
+        $createdAtTo = Carbon::now()->toDateString();
+        $createdAtFrom = Carbon::now()->subDays(30)->toDateString();
+
+        $url = route('api.package', [
+            'created_at_from' => $createdAtFrom,
+            'created_at_to' => $createdAtTo
+        ]);
 
         try {
             $response = Http::post($url);
 
             if ($response->successful()) {
                 $data = $response->json();
-
                 if (isset($data['packages']) && is_array($data['packages'])) {
                     foreach ($data['packages'] as $package) {
                         TrackingOrder::updateOrCreate(

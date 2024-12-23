@@ -25,12 +25,12 @@ class OrderController extends Controller
         }
 
         // Construct the URL with query parameters
-        $url = 'https://m6-agency-api.vns.gobizdev.com/packages?' . http_build_query([
+        $url = 'https://agency-api-logistics.mygobiz.net/packages?' . http_build_query([
                 'created_at_from' => $createdAtFrom,
                 'created_at_to' => $createdAtTo
             ]);
 
-        $authToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjcwRHdFdWxrOU5oQTJkSGNZQUJSVGJFV1AyYURneXpKaV9tekdYV1U1WXcifQ.eyJpc3MiOiJodHRwczovL29pZGMtdm5zLmdvYml6ZGV2LmNvbSIsImF1ZCI6InRlc3QiLCJqdGkiOiI3YzJlYTM1ZC0zMzUyLTQ2NTUtODU5Ni00ZDMxYmE0NGQxNzUiLCJpYXQiOjE3MDE4MzM0NDEsImV4cCI6MTg1OTUxMzQ0MSwiYWdlbmN5X2lkIjozLCJhZ2VuY3lfY29kZSI6Im5oYXBoYW5nIiwicGFydG5lcl9pZCI6MSwicGFydG5lcl9jb2RlIjoieGxvZ2lzdGljcyIsInNjb3BlIjoiY3JlYXRvcjo1MCIsInN1YiI6IjUwIn0.qp_GoegjY8HNIlZgt8jHRoNhlV0onxc9GY7pHOBMO-Ckgoqzmy17znMlJo_BItQygZCqY9QeHzDGdUYfVEcMG0R4ujHmB67gJ7IHp06ujy0hw_Hve2viBkeqXoFlinxFKXfoT5_JhKJHWuplHrQrOhD570VyNgwwQD8cTJJSf2lF0vT8ZB0SuX4m-yCQ5RBZvDhF7FWTg7rrhChsisQ0FhdjKfxuOudj1u2GKe6w3sL6-uMKShpFZesH3gaG5XovMUUaX9JR3ZAKZyGJCJ6b019551vFdhJhk_ptF47nyxU3xvY5LLNvujFchXfXgCjQKXDCKd8LjEfL-vnO1GYpXA';
+        $authToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImJZLVBuSlJLbmI3UldWWWIwc05VeTM5bEJrSEg2bUFfRUg3cWN1ZkdLUHcifQ.eyJpc3MiOiJodHRwczovL29pZGMtbG9naXN0aWNzLm15Z29iaXoubmV0IiwiYXVkIjoibTYiLCJqdGkiOiJlZTJiZTMzNi01NmYxLTQ5MzctODM5MC05YzY1NWY3OTVhZTMiLCJpYXQiOjE3Mjg2NDI4MjMsImV4cCI6MTg4NjMyMjgyMywiYWdlbmN5X2lkIjoxNTUsImFnZW5jeV9jb2RlIjoiaWxfa3lndWk4OCIsInBhcnRuZXJfaWQiOjU5LCJwYXJ0bmVyX2NvZGUiOiJreWd1aTg4Iiwic2NvcGUiOiJjcmVhdG9yOjMzNjQiLCJzdWIiOiIzMzY0In0.y1NbwgNjbelaR1rhZs3ALGkuSOz-ah3uoj_QNEQ15BLLYuCfy9WKk5gJ2nNlCgA7JpR6qlJ3FVL6TlHyafTQDke8YtN-KrNyBdWLutQUT7MXDCzR64I0jkA4NFrCgwQnN9q5rIE9kBqHeqO66FjmNW1sVa4S5tgzxt6l74mwiCp4o2NHPRuOQ-lQuJatcMu7EUWwZEGTzmAp45YkHdxyX1eZoqR-aXnQMtBpyA3CoeUxJKkIlVcpEHbgcXQ6th6Wb7IsPw7gUwiW7xSG4ua3mmDZuE7XPb5VWbfOx3jsdMxhE2IrK4WuhpOYPr0b32juu7EPkEYLPXPaQ-1WfHT80g';
 
         $options = [
             'http' => [
